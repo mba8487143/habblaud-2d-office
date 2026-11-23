@@ -28,6 +28,8 @@ do meio (0.**3**.0).
 
 - **“verificado” na seção Sobre segue o idioma.** Em **Configurações › Sobre**, o “· verificado há 2 h” da versão
   aparecia em português em qualquer idioma.
+- **A contagem até o uso reiniciar segue o idioma.** No cartão de uso da barra de cima, o “em 3 h 43 min” aparecia em
+  português em qualquer idioma (agora “in 3 h 43 min”, “3 h 43 min mein”…).
 
 ## [1.0.3] - 2026-10-16
 
