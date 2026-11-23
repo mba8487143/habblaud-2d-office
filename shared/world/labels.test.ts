@@ -3,6 +3,7 @@ import { setLocale } from '../i18n';
 import { EN } from '../locales/en';
 import { ES } from '../locales/es';
 import { FR } from '../locales/fr';
+import { UR } from '../locales/ur';
 import { introLabel, introOptions, isIntroId } from './intro';
 import { INTRO_IDS, TRAIT_IDS } from './protocol';
 import { isTraitId, parsePlayerTraits, TRAITS, traitsClash } from './traits';
@@ -34,11 +35,11 @@ const INTRO_PT: Record<string, string> = {
 };
 
 describe('frases de apresentação', () => {
-  it('os 20 ids com o texto do contrato, traduzidos nos 3 idiomas', () => {
+  it('os 20 ids com o texto do contrato, traduzidos nos 4 idiomas', () => {
     expect(Object.keys(INTRO_PT)).toEqual([...INTRO_IDS]);
     for (const id of INTRO_IDS) {
       expect(introLabel(id)).toBe(INTRO_PT[id]);
-      for (const dict of [EN, ES, FR]) expect(dict[INTRO_PT[id]], `${id}`).toBeTruthy();
+      for (const dict of [EN, ES, FR, UR]) expect(dict[INTRO_PT[id]], `${id}`).toBeTruthy();
     }
     expect(introOptions().map((o) => o.id)).toEqual([...INTRO_IDS]);
   });

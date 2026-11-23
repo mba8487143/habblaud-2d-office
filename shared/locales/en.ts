@@ -907,6 +907,7 @@ export const EN: Readonly<Record<string, string>> = {
   "Uma das janelas já reiniciou depois da última leitura.": "One of the windows has reset since the last reading.",
 
   // client/src/ui/version.ts
+  "verificado {0}": "checked {0}",
   "Este servidor não verifica versões novas.": "This server doesn't check for new versions.",
   "Verificação de versão nova desligada (HABBLAUD_UPDATE_CHECK=0).": "New version check is off (HABBLAUD_UPDATE_CHECK=0).",
   "Verificação de versão nova desligada: o package.json não aponta um repositório no GitHub.": "New version check is off: package.json doesn't point to a GitHub repository.",

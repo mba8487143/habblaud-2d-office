@@ -9,7 +9,10 @@
 // Os textos de atividade são montados pelo servidor, então seguem o idioma do servidor.
 import { DICTIONARIES } from './locales/all';
 
-export type Locale = 'pt-BR' | 'en' | 'es' | 'fr';
+export type Locale = 'pt-BR' | 'en' | 'es' | 'fr' | 'ur-Latn';
+
+/** Os quatro idiomas de origem do projeto, os únicos que o Habblaud World conhece (ver baseLocale). */
+export type BaseLocale = Exclude<Locale, 'ur-Latn'>;
 
 /** Na ordem do seletor; o nome de cada idioma vai na própria língua, para quem não entende o idioma atual. */
 export const LOCALES: { id: Locale; name: string }[] = [
@@ -17,7 +20,14 @@ export const LOCALES: { id: Locale; name: string }[] = [
   { id: 'en', name: 'English' },
   { id: 'es', name: 'Español' },
   { id: 'fr', name: 'Français' },
+  { id: 'ur-Latn', name: 'Roman Urdu' },
 ];
+
+/**
+ * Idioma de reserva: um texto sem tradução no idioma ativo procura primeiro aqui, antes de cair no PT. O Roman Urdu
+ * cai no inglês, que quem lê Roman Urdu entende melhor que o português.
+ */
+export const FALLBACK: Partial<Record<Locale, Locale>> = { 'ur-Latn': 'en' };
 
 /** Chave da preferência salva no navegador. */
 export const LOCALE_STORAGE_KEY = 'habblaud:locale';
@@ -38,7 +48,14 @@ export function normalizeLocale(v: string | null | undefined): Locale | undefine
   if (s === 'pt' || s.startsWith('pt-')) return 'pt-BR';
   if (s === 'en' || s.startsWith('en-')) return 'en';
   if (s === 'es' || s.startsWith('es-')) return 'es';
+  // Urdu (ur, ur-PK, ur-Latn, ur_PK.UTF-8): só existe a versão em letras latinas (Roman Urdu).
+  if (s === 'ur' || s.startsWith('ur-')) return 'ur-Latn';
   return undefined;
+}
+
+/** O idioma de origem mais próximo: o Roman Urdu vira inglês. Para o Habblaud World, que só conhece os quatro. */
+export function baseLocale(l: Locale = current): BaseLocale {
+  return l === 'ur-Latn' ? 'en' : l;
 }
 
 /**
@@ -102,16 +119,20 @@ export function setLocale(l: Locale): void {
 
 /**
  * Traduz um texto escrito em PT. Lacunas numeradas ({0}, {1}...) recebem `args` na ordem; a tradução pode
- * reordená-las. Sem tradução para o idioma ativo, devolve o texto original.
+ * reordená-las. Sem tradução para o idioma ativo, tenta o idioma de reserva (FALLBACK) e, por fim, devolve o texto
+ * original.
  */
 export function tr(src: string, args?: readonly unknown[]): string {
   const dict = DICTS[current];
-  const s = (dict && dict[src]) || src;
+  const fallback = FALLBACK[current];
+  const s = (dict && dict[src]) || (fallback && DICTS[fallback]?.[src]) || src;
   if (!args || args.length === 0) return s;
   return s.replace(/\{(\d+)\}/g, (m, i: string) => (Number(i) < args.length ? String(args[Number(i)]) : m));
 }
 
 /** Idioma no formato do Intl (datas, números). */
 export function intlLocale(): string {
+  // Roman Urdu: datas e números como no Paquistão, mas com os meses em letras latinas (o ur-PK usaria a escrita árabe).
+  if (current === 'ur-Latn') return 'en-PK';
   return current === 'fr' ? 'fr-FR' : current === 'en' ? 'en-US' : current === 'es' ? 'es' : 'pt-BR';
 }

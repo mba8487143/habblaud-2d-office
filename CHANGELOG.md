@@ -10,6 +10,18 @@ do meio (0.**3**.0).
 
 ## [Não lançado]
 
+### Adicionado
+
+- **Interface em Roman Urdu.** Novo idioma em **Configurações › Idioma da interface**: o urdu escrito em letras
+  latinas, como se digita no Paquistão (navegador em `ur`/`ur-PK` já abre nele). Para os textos do servidor
+  (atividades, avisos, logs), `HABBLAUD_LANG=ur`. Um texto ainda sem tradução aparece em inglês, não em português. O
+  Habblaud World só conhece os quatro idiomas de origem, então a conta e o prédio vão para ele como inglês.
+
+### Corrigido
+
+- **“verificado” na seção Sobre segue o idioma.** Em **Configurações › Sobre**, o “· verificado há 2 h” da versão
+  aparecia em português em qualquer idioma.
+
 ## [1.0.3] - 2026-10-16
 
 ### Corrigido

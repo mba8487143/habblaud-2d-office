@@ -1,8 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { getLocale, intlLocale, normalizeLocale, serverLocale, setLocale, tr } from './i18n';
+import { baseLocale, getLocale, intlLocale, normalizeLocale, registerDictionary, serverLocale, setLocale, tr } from './i18n';
 import { EN } from './locales/en';
 import { ES } from './locales/es';
 import { FR } from './locales/fr';
+import { UR } from './locales/ur';
 
 const placeholders = (s: string) => new Set(s.match(/\{\w+\}/g) ?? []);
 
@@ -21,6 +22,10 @@ describe('i18n', () => {
     expect(normalizeLocale('pt_PT')).toBe('pt-BR');
     expect(normalizeLocale('en-US')).toBe('en');
     expect(normalizeLocale('es_AR.UTF-8')).toBe('es');
+    expect(normalizeLocale('ur')).toBe('ur-Latn');
+    expect(normalizeLocale('ur-PK')).toBe('ur-Latn');
+    expect(normalizeLocale('ur-Latn')).toBe('ur-Latn');
+    expect(normalizeLocale('ur_PK.UTF-8')).toBe('ur-Latn');
     expect(normalizeLocale('de-DE')).toBeUndefined();
     expect(normalizeLocale('')).toBeUndefined();
     expect(normalizeLocale(null)).toBeUndefined();
@@ -62,14 +67,44 @@ describe('i18n', () => {
     expect(intlLocale()).toBe('es');
   });
 
+  it('Roman Urdu: traduz, cai no inglês (não no PT) quando falta tradução e usa datas do Paquistão', () => {
+    setLocale('ur-Latn');
+    expect(tr('Lendo {0}', ['app.ts'])).toBe(UR['Lendo {0}'].replace('{0}', 'app.ts'));
+    expect(tr('Lendo {0}', ['app.ts'])).not.toBe(EN['Lendo {0}'].replace('{0}', 'app.ts'));
+    expect(intlLocale()).toBe('en-PK');
+    try {
+      registerDictionary('ur-Latn', {});
+      expect(tr('Lendo {0}', ['app.ts'])).toBe(EN['Lendo {0}'].replace('{0}', 'app.ts'));
+      expect(tr('Texto que ninguém traduziu')).toBe('Texto que ninguém traduziu');
+    } finally {
+      registerDictionary('ur-Latn', UR);
+    }
+  });
+
+  it('o Habblaud World só conhece os quatro idiomas de origem: o Roman Urdu vai como inglês', () => {
+    expect(baseLocale('ur-Latn')).toBe('en');
+    expect(baseLocale('fr')).toBe('fr');
+    expect(baseLocale('pt-BR')).toBe('pt-BR');
+    setLocale('ur-Latn');
+    expect(baseLocale()).toBe('en');
+  });
+
+  it('Roman Urdu traduz os mesmos textos que o inglês', () => {
+    expect(Object.keys(UR).sort()).toEqual(Object.keys(EN).sort());
+  });
+
   it('nenhuma tradução fica vazia nem perde ou inventa lacunas', () => {
-    for (const [lang, dict] of Object.entries({ en: EN, es: ES, fr: FR })) {
+    // Junta os problemas e confere uma vez só: ~12 mil textos com um expect cada passavam do tempo em máquina carregada.
+    const problems: string[] = [];
+    for (const [lang, dict] of Object.entries({ en: EN, es: ES, fr: FR, ur: UR })) {
       for (const [pt, t] of Object.entries(dict)) {
-        expect(t.trim(), `${lang}: ${pt}`).not.toBe('');
+        if (!t.trim()) problems.push(`${lang}: vazia: ${pt}`);
         const original = placeholders(pt);
-        for (const p of placeholders(t)) expect(original.has(p), `${lang}: ${pt} -> ${t}`).toBe(true);
-        if (lang !== 'fr') for (const p of original) expect(placeholders(t).has(p), `${lang}: ${pt} -> ${t}`).toBe(true);
+        const translated = placeholders(t);
+        for (const p of translated) if (!original.has(p)) problems.push(`${lang}: inventou ${p}: ${pt} -> ${t}`);
+        if (lang !== 'fr') for (const p of original) if (!translated.has(p)) problems.push(`${lang}: perdeu ${p}: ${pt} -> ${t}`);
       }
     }
+    expect(problems).toEqual([]);
   });
 });

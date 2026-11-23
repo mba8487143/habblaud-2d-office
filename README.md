@@ -420,12 +420,13 @@ activities and animations. The day/night cycle is still a separate option.
 
 ### Languages
 
-The interface is in **Portuguese, English, Spanish and French**. It follows the browser's language; in
+The interface is in **Portuguese, English, Spanish, French and Roman Urdu**. It follows the browser's language; in
 **Settings › Language** you can pin one (the choice is saved in this browser). The texts the server builds
 (activities, notices, terminal, logs and the install scripts) follow `HABBLAUD_LANG` and, without it, the
 system language, except English: many machines and every container come in English by default, even for people who use another language.
-For the server in English, set `HABBLAUD_LANG=en` (in Docker, in `.env`). Any text without a translation shows up in
-Portuguese.
+For the server in English, set `HABBLAUD_LANG=en` (in Docker, in `.env`); in Roman Urdu, `HABBLAUD_LANG=ur`. Any text
+without a translation shows up in Portuguese (in Roman Urdu, in English). Habblaud World only knows the four original
+languages, so a Roman Urdu office talks to it in English.
 
 ### Day, night and sounds
 

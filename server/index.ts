@@ -39,8 +39,7 @@ import { CodexHistory } from './sources/codex/history';
 import { CodexSource } from './sources/codex/source';
 import { createBuildReader, readBuildInfo } from './build';
 import { UpdateChecker } from './updates/checker';
-import { getLocale, tr } from '../shared/i18n';
-import type { WorldLocale } from '../shared/world/protocol';
+import { baseLocale, tr } from '../shared/i18n';
 import { createCliRunner, createOpener, SpawnService } from './spawn/spawn';
 import { runnableClaudeBin } from './claude-bin';
 import { AttachmentStore } from './spawn/attachments';
@@ -162,7 +161,8 @@ const worldUplink =
           const b = readBuildInfo(config.rootDir);
           return { commit: b.commit, dirty: b.dirty };
         },
-        locale: () => getLocale() as WorldLocale,
+        // O World só conhece os quatro idiomas de origem: o Roman Urdu vai como inglês.
+        locale: () => baseLocale(),
         store: worldStore,
         canAct: () => config.terminal,
         agents: () => office.list(),

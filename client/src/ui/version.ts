@@ -33,7 +33,7 @@ export type UpdateTone = 'new' | 'ok' | 'pending' | 'warn' | 'off';
 /** Linha de estado da seção "Sobre". */
 export function updateStatusLine(version: string, s: UpdateStatus | undefined, now: number): { tone: UpdateTone; text: string } {
   if (!s) return { tone: 'off', text: tr('Este servidor não verifica versões novas.') };
-  const checked = s.checkedAt ? ` · verificado ${relativeTime(s.checkedAt, now)}` : '';
+  const checked = s.checkedAt ? ` · ${tr('verificado {0}', [relativeTime(s.checkedAt, now)])}` : '';
   switch (s.state) {
     case 'off':
       return {
