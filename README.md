@@ -127,7 +127,7 @@ shrinks on its own.
 
 ### Requirements
 
-- **macOS** (tested) or Linux.
+- **macOS** (tested), Linux or **Windows** (see [Windows: step by step on a new PC](#windows-step-by-step-on-a-new-pc)).
 - **[Claude Code](https://code.claude.com)** installed, with one or more accounts (2.1.287 or newer for the mod).
 - **Node.js 22.12+** and **npm** (developed with Node 24; Docker already uses Node 24).
 - **Docker Desktop** (or Docker Engine with Compose v2), if you're going to run it in a container.
@@ -247,6 +247,44 @@ shows up in **Task Manager › Startup apps**, where you can also turn it off.
 Habblaud is also a **PWA**: in Chrome or Edge, **Install app** (the icon in the address bar) adds it to the Start menu
 and taskbar. If the installed app opens while the server is off, it shows "Habblaud isn't running" and reloads on its
 own as soon as the server answers (the service worker only keeps that page; the office always comes from the server).
+
+### Windows: step by step on a new PC
+
+The steps above, in order, for a Windows PC (in PowerShell). Install first: **Git**, **Node.js 22.12+**, **Chrome or
+Edge** and **Claude Code** (signed in: Habblaud shows its sessions).
+
+```powershell
+git clone https://github.com/mba8487143/habblaud-2d-office.git   # 1. get the project
+cd habblaud-2d-office                                             # 2. go into the folder
+npm install                                                       # 3. build tools
+Set-Content -Path .env -Value 'HABBLAUD_LANG=ur' -Encoding ascii  # 4. server texts in Roman Urdu (en: English)
+npm run build                                                     # 5. build
+claude --version                                                  # 6. the mod needs 2.1.287+ (older: claude update)
+npm run mod:install                                               # 7. the mod; open sessions: /reload-plugins
+npm run desktop:install                                           # 8. "Habblaud" icon on the desktop
+npm run autostart:install                                         # 9. start at sign-in (-- --open: open the window too)
+```
+
+Then double-click the **Habblaud** icon: the server starts and the office opens in its own window. The interface
+follows the browser's language; pick **Roman Urdu** once in **Settings › Language** (the choice is saved per browser).
+
+- **`claude` not found:** the CLI is usually in `%USERPROFILE%\.local\bin`. For the current window:
+  `$env:Path = "$env:USERPROFILE\.local\bin;$env:Path"`, then step 7 again.
+- **"running scripts is disabled on this system":** type `npm.cmd` instead of `npm` (e.g. `npm.cmd install`).
+- **Moved the folder:** run steps 7, 8 and 9 again; they point to this folder.
+
+To update:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\windows\habblaud.ps1 -Stop   # stop the server
+git pull
+npm install
+npm run build
+npm run mod:install
+```
+
+Then open it from the desktop icon again. To remove the shortcuts: `npm run autostart:uninstall` and
+`npm run desktop:uninstall`.
 
 ### Open on your phone (optional)
 
@@ -754,7 +792,7 @@ Everything works without configuring anything. If you need to adjust something, 
 | `HABBLAUD_CODEX_DIRS` | automatic detection | Codex folders, comma-separated (instead of `~/.codex*` and `CODEX_HOME`). |
 | `HABBLAUD_CODEX_BIN` | `codex` from PATH (on Windows, `codex.exe`) | The Codex binary that delivers the messages (`codex queue`), in Node mode or in `npm run codex:bridge`. |
 | `HABBLAUD_UPDATE_CHECK` | on | `0` turns off the new-version check (a request to the repository's releases on GitHub every 6 h). |
-| `HABBLAUD_LANG` | system language (except English), otherwise `pt-BR` | Language of the texts the server builds (activities, notices, logs): `pt-BR`, `en`, `es` or `fr`. The interface follows the browser or the choice in Settings › Language. See [Languages](#languages). |
+| `HABBLAUD_LANG` | system language (except English), otherwise `pt-BR` | Language of the texts the server builds (activities, notices, logs): `pt-BR`, `en`, `es`, `fr` or `ur` (Roman Urdu). The interface follows the browser or the choice in Settings › Language. See [Languages](#languages). |
 | `HABBLAUD_ACCOUNTS` | — | JSON to customize name, letter or color, matched by the account folder name. E.g. `[{"id":".claude-conta2","name":"Trabalho","short":"T","color":"#5cc97b"}]`. |
 
 **In Docker**, `HABBLAUD_PORT`, `HABBLAUD_BIND`, `HABBLAUD_ALLOWED_HOSTS`, `HABBLAUD_DEMO`, `HABBLAUD_TERMINAL`,
