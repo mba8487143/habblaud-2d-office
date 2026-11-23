@@ -232,12 +232,17 @@ also keep `npm run codex:bridge` running on the Mac (see [Codex](#codex)).
 
 ```bash
 npm run desktop:install      # "Habblaud" icon on the desktop (undo: npm run desktop:uninstall)
+npm run autostart:install    # start the server when you sign in to Windows (undo: npm run autostart:uninstall)
 ```
 
 Double-click the icon: if Habblaud isn't running yet, it starts in the background (building first if `dist/` is
 missing, with this folder's `.env`, logs in `~/.habblaud/logs/server.log`), then the office opens in its own app
 window (Chrome or Edge with `--app`, otherwise the default browser). The server keeps running after you close the
 window; to stop it: `powershell -ExecutionPolicy Bypass -File scripts\windows\habblaud.ps1 -Stop`.
+
+`autostart:install` puts the same shortcut in the Windows **Startup** folder: when you sign in, the server starts on
+its own in the background, without opening a window (`npm run autostart:install -- --open` opens the window too). It
+shows up in **Task Manager › Startup apps**, where you can also turn it off.
 
 Habblaud is also a **PWA**: in Chrome or Edge, **Install app** (the icon in the address bar) adds it to the Start menu
 and taskbar. If the installed app opens while the server is off, it shows "Habblaud isn't running" and reloads on its

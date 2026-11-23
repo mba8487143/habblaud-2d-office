@@ -3296,4 +3296,11 @@ export const ES: Readonly<Record<string, string>> = {
   "Nenhum atalho do Habblaud na área de trabalho.": "No hay ningún acceso directo de Habblaud en el escritorio.",
   "Uso: npm run desktop:install (cria o atalho) ou npm run desktop:uninstall (apaga)": "Uso: npm run desktop:install (crea el acceso directo) o npm run desktop:uninstall (lo elimina)",
   "O atalho da área de trabalho por enquanto é só do Windows. Nos outros sistemas: npm start e abra http://localhost:4747.": "Por ahora el acceso directo del escritorio es solo para Windows. En otros sistemas: npm start y abre http://localhost:4747.",
+  "Não foi possível ligar o início automático: {0}": "No se pudo activar el inicio automático: {0}",
+  "✓ Início automático ligado: {0}": "✓ Inicio automático activado: {0}",
+  "Quando você entrar no Windows, o Habblaud sobe sozinho e abre o escritório numa janela própria.": "Al iniciar sesión en Windows, Habblaud arranca solo y abre la oficina en su propia ventana.",
+  "Quando você entrar no Windows, o servidor do Habblaud sobe sozinho em segundo plano (sem abrir janela). Para abrir o escritório, use o ícone da área de trabalho.": "Al iniciar sesión en Windows, el servidor de Habblaud arranca solo en segundo plano (sin abrir ventana). Para abrir la oficina, usa el icono del escritorio.",
+  "✓ Início automático desligado: {0}": "✓ Inicio automático desactivado: {0}",
+  "O início automático já estava desligado.": "El inicio automático ya estaba desactivado.",
+  "Início automático: npm run autostart:install (ou -- --open, para abrir a janela também) e npm run autostart:uninstall": "Inicio automático: npm run autostart:install (o -- --open para abrir también la ventana) y npm run autostart:uninstall",
 };

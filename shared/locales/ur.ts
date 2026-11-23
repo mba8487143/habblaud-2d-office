@@ -3296,4 +3296,11 @@ export const UR: Readonly<Record<string, string>> = {
   "Nenhum atalho do Habblaud na área de trabalho.": "Desktop par Habblaud ka koi shortcut nahi.",
   "Uso: npm run desktop:install (cria o atalho) ou npm run desktop:uninstall (apaga)": "Istemaal: npm run desktop:install (shortcut banata hai) ya npm run desktop:uninstall (hatata hai)",
   "O atalho da área de trabalho por enquanto é só do Windows. Nos outros sistemas: npm start e abra http://localhost:4747.": "Desktop shortcut abhi sirf Windows ke liye hai. Doosre systems par: npm start chalayein aur http://localhost:4747 kholein.",
+  "Não foi possível ligar o início automático: {0}": "Auto-start on nahi ho saka: {0}",
+  "✓ Início automático ligado: {0}": "✓ Auto-start on ho gaya: {0}",
+  "Quando você entrar no Windows, o Habblaud sobe sozinho e abre o escritório numa janela própria.": "Windows mein login karte hi Habblaud khud chal jayega aur office apni alag window mein khulega.",
+  "Quando você entrar no Windows, o servidor do Habblaud sobe sozinho em segundo plano (sem abrir janela). Para abrir o escritório, use o ícone da área de trabalho.": "Windows mein login karte hi Habblaud server background mein khud chal jayega (koi window nahi khulegi). Office kholne ke liye desktop wala icon use karein.",
+  "✓ Início automático desligado: {0}": "✓ Auto-start off ho gaya: {0}",
+  "O início automático já estava desligado.": "Auto-start pehle se off tha.",
+  "Início automático: npm run autostart:install (ou -- --open, para abrir a janela também) e npm run autostart:uninstall": "Auto-start: npm run autostart:install (window bhi kholni ho to -- --open) aur npm run autostart:uninstall",
 };

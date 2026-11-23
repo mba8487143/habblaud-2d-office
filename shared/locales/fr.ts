@@ -3312,4 +3312,11 @@ export const FR: Readonly<Record<string, string>> = {
   "Nenhum atalho do Habblaud na área de trabalho.": "Aucun raccourci Habblaud sur le bureau.",
   "Uso: npm run desktop:install (cria o atalho) ou npm run desktop:uninstall (apaga)": "Usage : npm run desktop:install (crée le raccourci) ou npm run desktop:uninstall (le supprime)",
   "O atalho da área de trabalho por enquanto é só do Windows. Nos outros sistemas: npm start e abra http://localhost:4747.": "Le raccourci du bureau est pour l’instant réservé à Windows. Ailleurs : npm start puis ouvrez http://localhost:4747.",
+  "Não foi possível ligar o início automático: {0}": "Impossible d’activer le démarrage automatique : {0}",
+  "✓ Início automático ligado: {0}": "✓ Démarrage automatique activé : {0}",
+  "Quando você entrar no Windows, o Habblaud sobe sozinho e abre o escritório numa janela própria.": "À l’ouverture de session Windows, Habblaud démarre tout seul et ouvre le bureau dans sa propre fenêtre.",
+  "Quando você entrar no Windows, o servidor do Habblaud sobe sozinho em segundo plano (sem abrir janela). Para abrir o escritório, use o ícone da área de trabalho.": "À l’ouverture de session Windows, le serveur Habblaud démarre tout seul en arrière-plan (sans fenêtre). Pour ouvrir le bureau Habblaud, utilisez l’icône sur le Bureau Windows.",
+  "✓ Início automático desligado: {0}": "✓ Démarrage automatique désactivé : {0}",
+  "O início automático já estava desligado.": "Le démarrage automatique était déjà désactivé.",
+  "Início automático: npm run autostart:install (ou -- --open, para abrir a janela também) e npm run autostart:uninstall": "Démarrage automatique : npm run autostart:install (ou -- --open pour ouvrir aussi la fenêtre) et npm run autostart:uninstall",
 };

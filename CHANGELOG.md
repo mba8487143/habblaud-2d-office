@@ -24,6 +24,9 @@ do meio (0.**3**.0).
   servidor em segundo plano (se ainda não estiver rodando) e abre o escritório numa janela própria (Chrome ou Edge com
   `--app`). O app instalável ganhou service worker: aberto com o servidor parado, mostra “Habblaud está desligado” e
   recarrega sozinho quando o servidor volta.
+- **Início automático no Windows.** `npm run autostart:install` põe o atalho na pasta Inicializar: ao entrar no
+  Windows, o servidor sobe sozinho em segundo plano, sem janela (`-- --open` abre a janela também). Aparece em
+  Gerenciador de Tarefas › Aplicativos de inicialização; `npm run autostart:uninstall` desliga.
 
 ### Alterado
 

@@ -42,8 +42,10 @@
     "codex:uninstall": "tsx scripts/codex-install.ts uninstall",
     "codex:status": "tsx scripts/codex-install.ts status",
     "codex:bridge": "tsx scripts/codex-bridge.ts",
-    "desktop:install": "tsx scripts/desktop-install.ts install",
-    "desktop:uninstall": "tsx scripts/desktop-install.ts uninstall",
+    "desktop:install": "tsx scripts/desktop-install.ts desktop:install",
+    "desktop:uninstall": "tsx scripts/desktop-install.ts desktop:uninstall",
+    "autostart:install": "tsx scripts/desktop-install.ts autostart:install",
+    "autostart:uninstall": "tsx scripts/desktop-install.ts autostart:uninstall",
     "remote:setup": "tsx scripts/remote-setup.ts",
     "remote:mdns": "tsx scripts/remote-mdns.ts",
     "release": "tsx scripts/release.ts"

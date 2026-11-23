@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { buildIco, CREATE_SHORTCUT_PS, pngSize, REMOVE_SHORTCUT_PS } from '../../scripts/desktop-install';
+import { buildIco, CREATE_SHORTCUT_PS, launcherArgs, pngSize, REMOVE_SHORTCUT_PS } from '../../scripts/desktop-install';
 
 const BRAND = join(__dirname, '..', '..', 'client', 'public', 'assets', 'brand');
 const png = (f: string) => readFileSync(join(BRAND, f));
@@ -31,10 +31,18 @@ describe('desktop:install', () => {
     expect(() => buildIco([png('icon-512.png')])).toThrow();
   });
 
-  it('o atalho chama o habblaud.ps1 sem janela; a remoção só apaga o atalho do Habblaud', () => {
+  it('o atalho chama o habblaud.ps1 sem janela, na pasta pedida; a remoção só apaga o atalho do Habblaud', () => {
     expect(CREATE_SHORTCUT_PS).toContain('-WindowStyle Hidden -File');
     expect(CREATE_SHORTCUT_PS).toContain('$env:HB_LAUNCHER');
-    expect(CREATE_SHORTCUT_PS).toContain("'Habblaud.lnk'");
+    expect(CREATE_SHORTCUT_PS).toContain('GetFolderPath($env:HB_PLACE)');
+    expect(CREATE_SHORTCUT_PS).toContain('$env:HB_EXTRA');
+    expect(REMOVE_SHORTCUT_PS).toContain('GetFolderPath($env:HB_PLACE)');
     expect(REMOVE_SHORTCUT_PS).toContain("-like '*habblaud.ps1*'");
+  });
+
+  it('início automático: só sobe o servidor, a não ser com --open; o da área de trabalho sempre abre a janela', () => {
+    expect(launcherArgs('Startup', false)).toBe('-NoOpen');
+    expect(launcherArgs('Startup', true)).toBe('');
+    expect(launcherArgs('Desktop', false)).toBe('');
   });
 });
