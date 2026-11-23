@@ -17,6 +17,13 @@ do meio (0.**3**.0).
   (atividades, avisos, logs), `HABBLAUD_LANG=ur`. Um texto ainda sem tradução aparece em inglês, não em português. O
   Habblaud World só conhece os quatro idiomas de origem, então a conta e o prédio vão para ele como inglês.
 
+### Alterado
+
+- **Personagens com nomes paquistaneses.** Os agentes do escritório (e os do modo demonstração) chegam com nomes como
+  Ayesha, Hamza e Zainab, em vez dos brasileiros. O Habblaud World continua recebendo os nomes da lista original
+  (`NAME_POOL`), porque o servidor do mundo confere cada nome do pacote contra ela. Quem já está no escritório mantém
+  o nome guardado em `names.json` até a sessão acabar.
+
 ### Corrigido
 
 - **“verificado” na seção Sobre segue o idioma.** Em **Configurações › Sobre**, o “· verificado há 2 h” da versão

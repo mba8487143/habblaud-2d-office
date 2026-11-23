@@ -4,7 +4,7 @@
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { parseAppearanceParts, parseCharacterName, parseSeed, type AppearanceParts } from '../../shared/appearance';
-import { pickName, type PersonName } from '../../shared/names';
+import { pickOfficeName, type PersonName } from '../../shared/names';
 import { errMsg, log } from '../log';
 import { tr } from '../../shared/i18n';
 
@@ -98,7 +98,7 @@ export class NameStore {
       this.scheduleFlush();
       return { name: stored.name, look: stored.look };
     }
-    const person = pickName(key, used);
+    const person = pickOfficeName(key, used);
     this.remember(key, person);
     return person;
   }

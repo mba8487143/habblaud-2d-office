@@ -374,7 +374,7 @@ uninstallers leave `settings.json.habblaud-backup-<data>` copies in each account
 | **Subagent done** | Walks over to the agent that called it, delivers the result and leaves by elevator. |
 | **Session ended** | Leaves; if it was the last one in the room, it turns off the lights on the way out. |
 
-Each character has a **unique Brazilian name** (Marina, Henrique, Luan…) that stays as long as the session exists, and
+Each character has a **unique Pakistani name** (Ayesha, Hamza, Zainab…) that stays as long as the session exists, and
 a **colored chip with the account letter** (C, D…).
 
 ### Interface
