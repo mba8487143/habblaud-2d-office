@@ -1143,6 +1143,43 @@
   font-style: italic;
 }
 
+/* Este computador (ui/system.ts): CPU, memória e bateria com o visual dos cartões de uso e um ícone no lugar do chip.
+   Fica num invólucro próprio para as regras que contam as contas por :nth-child não o contarem. */
+.ui-sys {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.ui-sys-card {
+  --acc: #6fb7ff;
+  width: 252px;
+  min-width: 206px;
+}
+
+.ui-sys-card__icon {
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  min-height: 30px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--acc) 24%, #1a1f2b);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--acc) 45%, transparent);
+  color: #d6ebff;
+}
+
+.ui-sys-card .ui-usage-card__meters {
+  grid-template-columns: auto minmax(16px, 1fr) 32px auto;
+}
+
+/* No celular a barra já tem duas linhas (contadores e contas): o cartão do computador fica de fora. */
+@media (max-width: 600px) {
+  .ui-sys {
+    display: none;
+  }
+}
+
 /* Cartão estreito (3 contas, telas médias): some o e-mail (fica na dica), depois rótulos e reinício encurtam. */
 @container usage-card (max-width: 236px) {
   .ui-usage-card__email {

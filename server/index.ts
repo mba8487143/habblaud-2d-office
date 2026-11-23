@@ -40,6 +40,7 @@ import { CodexSource } from './sources/codex/source';
 import { createBuildReader, readBuildInfo } from './build';
 import { UpdateChecker } from './updates/checker';
 import { baseLocale, tr } from '../shared/i18n';
+import { SystemStatsService } from './system/stats';
 import { createCliRunner, createOpener, SpawnService } from './spawn/spawn';
 import { runnableClaudeBin } from './claude-bin';
 import { AttachmentStore } from './spawn/attachments';
@@ -338,6 +339,9 @@ const ticker = setInterval(() => {
   }
 }, 250);
 
+// CPU, memória e bateria deste computador, para a barra de cima (GET /api/system).
+const systemStats = new SystemStatsService();
+
 const api = createApiHandler({
   renameRoom: (id, name) => {
     const path = office.roomPath(id);
@@ -373,6 +377,7 @@ const api = createApiHandler({
   },
   codexLive,
   stats,
+  system: () => systemStats.read(),
   updates,
   remote: config.remote ? { is: isRemoteRequest, allows: (f) => config.remote!.allow.has(f) } : undefined,
   world: world ? createWorldRoutes(world, worldViewer, worldSocial) : undefined,

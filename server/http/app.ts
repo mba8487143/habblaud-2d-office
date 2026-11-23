@@ -1,7 +1,7 @@
 // Rotas da API (/api/*). Respostas JSON; rotas desconhecidas -> 404 JSON.
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { NAME_MAX, parseAppearanceParts, parseCharacterName, parseSeed } from '../../shared/appearance';
-import type { AccessInfo, AgentInfo, ModSummary, OfficeSnapshot, SourceInfo, UpdateStatus } from '../../shared/types';
+import type { AccessInfo, AgentInfo, ModSummary, OfficeSnapshot, SourceInfo, SystemStats, UpdateStatus } from '../../shared/types';
 import type { AccountsService } from '../accounts/service';
 import { handleCodexEvent } from '../codex/http';
 import type { DayStatsService } from '../history/daystats';
@@ -79,6 +79,8 @@ export interface ApiDeps {
   renameRoom?: (id: string, name: string) => string | undefined;
   /** Estatísticas do "Meu dia" (GET /api/stats, http/stats.ts). */
   stats?: DayStatsService;
+  /** CPU, memória e bateria deste computador (GET /api/system, system/stats.ts). Ausente = 404. */
+  system?: () => SystemStats;
   /** Verificação de versão nova no GitHub (GET /api/updates, POST /api/updates/check; updates/checker.ts). */
   updates?: {
     status(): UpdateStatus;
@@ -358,6 +360,13 @@ export function createApiHandler(deps: ApiDeps): (req: IncomingMessage, res: Ser
     if (path === '/api/snapshot') {
       if (!isRead) methodNotAllowed(res, 'GET');
       else sendJson(res, 200, hub.current());
+      return true;
+    }
+    if (path === '/api/system') {
+      // Só leitura, como o snapshot: vale também pela porta do celular (com login).
+      if (!isRead) methodNotAllowed(res, 'GET');
+      else if (!deps.system) sendJson(res, 404, { error: tr('rota desconhecida') });
+      else sendJson(res, 200, deps.system());
       return true;
     }
     if (path === '/api/health') {

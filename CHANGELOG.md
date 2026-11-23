@@ -16,6 +16,14 @@ do meio (0.**3**.0).
   latinas, como se digita no Paquistão (navegador em `ur`/`ur-PK` já abre nele). Para os textos do servidor
   (atividades, avisos, logs), `HABBLAUD_LANG=ur`. Um texto ainda sem tradução aparece em inglês, não em português. O
   Habblaud World só conhece os quatro idiomas de origem, então a conta e o prédio vão para ele como inglês.
+- **Este computador: CPU, memória e bateria na barra de cima.** Um cartão ao lado do uso das contas mostra o
+  processador, a memória em uso e a bateria (com ⚡ na tomada) do computador que roda o Habblaud, lidos pelo servidor
+  (`GET /api/system`; bateria pelo Win32_Battery no Windows, `pmset` no macOS e `/sys` no Linux). Sem bateria, a
+  linha some; no celular, o cartão fica de fora. Nada disso vai para a linha do tempo ou para o Habblaud World.
+- **Ícone na área de trabalho (Windows) e PWA.** `npm run desktop:install` cria o atalho “Habblaud”: ele sobe o
+  servidor em segundo plano (se ainda não estiver rodando) e abre o escritório numa janela própria (Chrome ou Edge com
+  `--app`). O app instalável ganhou service worker: aberto com o servidor parado, mostra “Habblaud está desligado” e
+  recarrega sozinho quando o servidor volta.
 
 ### Alterado
 

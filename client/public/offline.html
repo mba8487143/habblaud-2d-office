@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- Página do service worker (sw.js) quando o app abre com o servidor do Habblaud parado. Tenta de novo a cada 3 s e
+     recarrega sozinha quando o servidor responde. Textos no idioma salvo nas Configurações ou no do navegador. -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#12151d" />
+    <title>Habblaud</title>
+    <link rel="icon" href="/assets/brand/icon-192.png" type="image/png" />
+    <style>
+      html, body { margin: 0; height: 100%; background: #12151d; color: #e7ebf3; font: 15px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+      main { min-height: 100%; display: grid; place-items: center; padding: 24px; box-sizing: border-box; text-align: center; }
+      .box { max-width: 440px; }
+      img { width: 96px; height: 96px; image-rendering: pixelated; }
+      h1 { font-size: 20px; margin: 14px 0 6px; }
+      p { margin: 0 0 18px; color: #b3bbcc; }
+      code { background: #1d2230; border: 1px solid #2b3245; border-radius: 5px; padding: 1px 5px; color: #e7ebf3; }
+      button { font: inherit; font-weight: 600; color: #12151d; background: #ffcf8a; border: 0; border-radius: 8px; padding: 8px 16px; cursor: pointer; }
+      button:hover { background: #ffdca8; }
+      .wait { margin-top: 14px; font-size: 13px; color: #8b93a7; }
+      .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ffb547; margin-right: 6px; animation: blink 1.2s steps(2, end) infinite; }
+      @keyframes blink { 50% { opacity: 0.25; } }
+      @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="box">
+        <img src="/assets/brand/icon-192.png" alt="" />
+        <h1 id="title">Habblaud isn't running</h1>
+        <p id="body"></p>
+        <button id="retry" type="button">Try again</button>
+        <div class="wait"><span class="dot" aria-hidden="true"></span><span id="wait">Looking for Habblaud…</span></div>
+      </div>
+    </main>
+    <script>
+      (function () {
+        var T = {
+          'pt-BR': ['O Habblaud está desligado', 'Abra pelo ícone do Habblaud na área de trabalho (ou rode {cmd} na pasta do Habblaud). Esta página recarrega sozinha quando ele voltar.', 'Tentar de novo', 'Procurando o Habblaud…'],
+          en: ["Habblaud isn't running", 'Open it from the Habblaud icon on your desktop (or run {cmd} in the Habblaud folder). This page reloads on its own when it is back.', 'Try again', 'Looking for Habblaud…'],
+          es: ['Habblaud no está en marcha', 'Ábrelo desde el icono de Habblaud en el escritorio (o ejecuta {cmd} en la carpeta de Habblaud). Esta página se recarga sola cuando vuelva.', 'Reintentar', 'Buscando Habblaud…'],
+          fr: "Habblaud n'est pas lancé|Ouvrez-le depuis l'icône Habblaud du bureau (ou lancez {cmd} dans le dossier de Habblaud). Cette page se recharge toute seule à son retour.|Réessayer|Recherche de Habblaud…".split('|'),
+          'ur-Latn': ['Habblaud band hai', 'Desktop par Habblaud ke icon se kholein (ya Habblaud folder mein {cmd} chalayein). Habblaud chalte hi ye page khud reload ho jayega.', 'Dobara koshish karein', 'Habblaud ko dhoond raha hai…'],
+        };
+        function pick(v) {
+          var s = String(v || '').toLowerCase().replace('_', '-');
+          if (s === 'pt' || s.indexOf('pt-') === 0) return 'pt-BR';
+          if (s === 'ur' || s.indexOf('ur-') === 0) return 'ur-Latn';
+          if (s === 'es' || s.indexOf('es-') === 0) return 'es';
+          if (s === 'fr' || s.indexOf('fr-') === 0) return 'fr';
+          if (s === 'en' || s.indexOf('en-') === 0) return 'en';
+          return '';
+        }
+        var lang = '';
+        try { lang = pick(localStorage.getItem('habblaud:locale')); } catch (e) {}
+        if (!lang) {
+          var list = navigator.languages || [navigator.language];
+          for (var i = 0; i < list.length && !lang; i++) lang = pick(list[i]);
+        }
+        var t = T[lang || 'en'];
+        document.documentElement.lang = lang || 'en';
+        document.getElementById('title').textContent = t[0];
+        var body = document.getElementById('body');
+        var parts = t[1].split('{cmd}');
+        body.textContent = parts[0];
+        var code = document.createElement('code');
+        code.textContent = 'npm start';
+        body.appendChild(code);
+        body.appendChild(document.createTextNode(parts[1] || ''));
+        document.getElementById('retry').textContent = t[2];
+        document.getElementById('wait').textContent = t[3];
+
+        // O app abriu numa rota qualquer: volta para ela quando o servidor responder.
+        function check() {
+          fetch('/api/health', { cache: 'no-store' })
+            .then(function (r) { if (r.ok) location.reload(); })
+            .catch(function () {});
+        }
+        document.getElementById('retry').addEventListener('click', check);
+        setInterval(check, 3000);
+      })();
+    </script>
+  </body>
+</html>

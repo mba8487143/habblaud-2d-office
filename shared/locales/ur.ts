@@ -3275,4 +3275,25 @@ export const UR: Readonly<Record<string, string>> = {
   "Carimbo deixado na portaria: {0}": "Front desk par stamp chhora: {0}",
   "Entre no prédio ou chegue mais perto da porta para carimbar.": "Stamp lagane ke liye building mein jayein ya darwaze ke qareeb jayein.",
   "O carimbo não foi deixado. Tente de novo.": "Stamp nahi chhora ja saka. Dobara koshish karein.",
+
+  // client/src/ui/system.ts
+  "{0} núcleos": "{0} cores",
+  "Processador (CPU): {0}% em uso": "Processor (CPU): {0}% istemaal mein",
+  "Memória (RAM): {0}% em uso, {1} de {2} GB": "Memory (RAM): {0}% istemaal mein, {2} GB mein se {1}",
+  "carregando": "charge ho rahi hai",
+  "na tomada": "charger laga hai",
+  "na bateria": "battery par",
+  "Bateria: {0}% ({1})": "Battery: {0}% ({1})",
+  "Bateria": "Battery",
+  "Este computador: CPU, memória e bateria do computador que roda o Habblaud": "Ye computer: us computer ka CPU, memory aur battery jis par Habblaud chal raha hai",
+  "Este computador": "Ye computer",
+
+  // scripts/desktop-install.ts
+  "Não foi possível criar o atalho: {0}": "Shortcut nahi ban saka: {0}",
+  "✓ Atalho criado: {0}": "✓ Shortcut ban gaya: {0}",
+  "Dê dois cliques nele: o Habblaud sobe em segundo plano (se ainda não estiver rodando) e abre numa janela própria.": "Is par double-click karein: Habblaud background mein chal jayega (agar pehle se nahi chal raha) aur apni alag window mein khulega.",
+  "✓ Atalho removido: {0}": "✓ Shortcut hata diya: {0}",
+  "Nenhum atalho do Habblaud na área de trabalho.": "Desktop par Habblaud ka koi shortcut nahi.",
+  "Uso: npm run desktop:install (cria o atalho) ou npm run desktop:uninstall (apaga)": "Istemaal: npm run desktop:install (shortcut banata hai) ya npm run desktop:uninstall (hatata hai)",
+  "O atalho da área de trabalho por enquanto é só do Windows. Nos outros sistemas: npm start e abra http://localhost:4747.": "Desktop shortcut abhi sirf Windows ke liye hai. Doosre systems par: npm start chalayein aur http://localhost:4747 kholein.",
 };

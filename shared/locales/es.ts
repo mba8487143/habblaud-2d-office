@@ -3275,4 +3275,25 @@ export const ES: Readonly<Record<string, string>> = {
   "Carimbo deixado na portaria: {0}": "Sello dejado en la recepción: {0}",
   "Entre no prédio ou chegue mais perto da porta para carimbar.": "Entra al edificio o acércate más a la puerta para sellar.",
   "O carimbo não foi deixado. Tente de novo.": "El sello no se dejó. Inténtalo de nuevo.",
+
+  // client/src/ui/system.ts
+  "{0} núcleos": "{0} núcleos",
+  "Processador (CPU): {0}% em uso": "Procesador (CPU): {0}% en uso",
+  "Memória (RAM): {0}% em uso, {1} de {2} GB": "Memoria (RAM): {0}% en uso, {1} de {2} GB",
+  "carregando": "cargando",
+  "na tomada": "enchufado",
+  "na bateria": "con batería",
+  "Bateria: {0}% ({1})": "Batería: {0}% ({1})",
+  "Bateria": "Batería",
+  "Este computador: CPU, memória e bateria do computador que roda o Habblaud": "Este equipo: CPU, memoria y batería del equipo que ejecuta Habblaud",
+  "Este computador": "Este equipo",
+
+  // scripts/desktop-install.ts
+  "Não foi possível criar o atalho: {0}": "No se pudo crear el acceso directo: {0}",
+  "✓ Atalho criado: {0}": "✓ Acceso directo creado: {0}",
+  "Dê dois cliques nele: o Habblaud sobe em segundo plano (se ainda não estiver rodando) e abre numa janela própria.": "Haz doble clic en él: Habblaud arranca en segundo plano (si todavía no está en marcha) y se abre en su propia ventana.",
+  "✓ Atalho removido: {0}": "✓ Acceso directo eliminado: {0}",
+  "Nenhum atalho do Habblaud na área de trabalho.": "No hay ningún acceso directo de Habblaud en el escritorio.",
+  "Uso: npm run desktop:install (cria o atalho) ou npm run desktop:uninstall (apaga)": "Uso: npm run desktop:install (crea el acceso directo) o npm run desktop:uninstall (lo elimina)",
+  "O atalho da área de trabalho por enquanto é só do Windows. Nos outros sistemas: npm start e abra http://localhost:4747.": "Por ahora el acceso directo del escritorio es solo para Windows. En otros sistemas: npm start y abre http://localhost:4747.",
 };

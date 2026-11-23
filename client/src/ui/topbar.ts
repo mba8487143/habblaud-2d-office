@@ -9,6 +9,7 @@ import { computeCounters, shellLine, shellWaitIn, shellWaitingAgents, waitingAge
 import { TIMELAPSE_ICONS } from './timelapse';
 import { focusPermission, nextPermissionAgent, permissionAgents } from './permission';
 import { UsageCards } from './usage';
+import { SystemCard } from './system';
 import { VersionChip } from './version';
 import { wordmark } from './widgets';
 import { tr } from '../../../shared/i18n';
@@ -41,6 +42,7 @@ export class TopBar implements UiComponent {
   /** Próximo agente do botão de shells (cliques seguidos passam por todos, do que espera há mais tempo). */
   private shellCursor = 0;
   private usage: UsageCards;
+  private system: SystemCard;
   private version: VersionChip;
   private hadOpen = false;
   private sidebarBtn: HTMLButtonElement;
@@ -101,6 +103,8 @@ export class TopBar implements UiComponent {
     }
 
     this.usage = new UsageCards(ctx);
+    // CPU, memória e bateria deste computador (ui/system.ts): pergunta sozinho ao servidor, fora do render.
+    this.system = new SystemCard(ctx);
 
     this.sidebarBtn = iconButton(ICONS.sidebar, tr('Painel lateral ( [ )'), () => ctx.togglePanel('sidebar'), 'ui-btn-sidebar');
     this.feedBtn = iconButton(ICONS.feed, tr('Feed de atividade ( ] )'), () => ctx.togglePanel('feed'), 'ui-btn-feed');
@@ -153,6 +157,7 @@ export class TopBar implements UiComponent {
       ),
       counterWrap,
       this.usage.el,
+      this.system.el,
       h('div', { class: 'ui-topbar__right' }, viewGroup, panelGroup),
     );
   }

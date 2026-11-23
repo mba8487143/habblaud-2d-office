@@ -18,3 +18,9 @@ function loadDictionary(l: Locale | undefined): Promise<void> {
 const locale = getLocale();
 const dictionary = Promise.all([loadDictionary(locale), loadDictionary(FALLBACK[locale])]);
 void dictionary.then(() => import('./app')).then((app) => app.start());
+
+// PWA: o service worker só guarda a página "Habblaud está desligado" (client/public/sw.js); o app continua vindo do
+// servidor. Só no build de produção (no `npm run dev` o Vite serve tudo) e em contexto seguro (localhost ou HTTPS).
+if (import.meta.env.PROD && 'serviceWorker' in navigator && window.isSecureContext) {
+  addEventListener('load', () => void navigator.serviceWorker.register('/sw.js').catch(() => undefined));
+}

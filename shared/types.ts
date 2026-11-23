@@ -227,6 +227,21 @@ export interface RoomEffect {
 }
 
 /**
+ * CPU, memória e bateria do computador que roda o Habblaud (GET /api/system, server/system/stats.ts). Só para a barra
+ * de cima: não entra no snapshot, na linha do tempo nem no Habblaud World.
+ */
+export interface SystemStats {
+  /** Uso do processador (0–100) desde a leitura anterior; null na primeira leitura. */
+  cpu: { pct: number; cores: number } | null;
+  /** Memória física em uso (0–100) e os bytes. */
+  mem: { pct: number; usedBytes: number; totalBytes: number };
+  /** Bateria (0–100); null sem bateria (computador de mesa, Docker) ou sem como ler. */
+  battery: { pct: number; charging: boolean; plugged: boolean } | null;
+  /** Quando foi lida (epoch ms). */
+  at: number;
+}
+
+/**
  * Verificação de versão nova: o servidor consulta a release mais recente do repositório no GitHub
  * (server/updates/checker.ts) e compara com a versão em uso.
  */

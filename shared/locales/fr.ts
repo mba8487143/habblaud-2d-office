@@ -3291,4 +3291,25 @@ export const FR: Readonly<Record<string, string>> = {
   "Carimbo deixado na portaria: {0}": "Tampon laissé à l'accueil : {0}",
   "Entre no prédio ou chegue mais perto da porta para carimbar.": "Entrez dans l'immeuble ou approchez-vous de la porte pour tamponner.",
   "O carimbo não foi deixado. Tente de novo.": "Le tampon n'a pas été laissé. Réessayez.",
+
+  // client/src/ui/system.ts
+  "{0} núcleos": "{0} cœurs",
+  "Processador (CPU): {0}% em uso": "Processeur (CPU) : {0} % utilisé",
+  "Memória (RAM): {0}% em uso, {1} de {2} GB": "Mémoire (RAM) : {0} % utilisée, {1} sur {2} Go",
+  "carregando": "en charge",
+  "na tomada": "branché",
+  "na bateria": "sur batterie",
+  "Bateria: {0}% ({1})": "Batterie : {0} % ({1})",
+  "Bateria": "Batterie",
+  "Este computador: CPU, memória e bateria do computador que roda o Habblaud": "Cet ordinateur : CPU, mémoire et batterie de l’ordinateur qui fait tourner Habblaud",
+  "Este computador": "Cet ordinateur",
+
+  // scripts/desktop-install.ts
+  "Não foi possível criar o atalho: {0}": "Impossible de créer le raccourci : {0}",
+  "✓ Atalho criado: {0}": "✓ Raccourci créé : {0}",
+  "Dê dois cliques nele: o Habblaud sobe em segundo plano (se ainda não estiver rodando) e abre numa janela própria.": "Double-cliquez dessus : Habblaud démarre en arrière-plan (s’il ne tourne pas déjà) et s’ouvre dans sa propre fenêtre.",
+  "✓ Atalho removido: {0}": "✓ Raccourci supprimé : {0}",
+  "Nenhum atalho do Habblaud na área de trabalho.": "Aucun raccourci Habblaud sur le bureau.",
+  "Uso: npm run desktop:install (cria o atalho) ou npm run desktop:uninstall (apaga)": "Usage : npm run desktop:install (crée le raccourci) ou npm run desktop:uninstall (le supprime)",
+  "O atalho da área de trabalho por enquanto é só do Windows. Nos outros sistemas: npm start e abra http://localhost:4747.": "Le raccourci du bureau est pour l’instant réservé à Windows. Ailleurs : npm start puis ouvrez http://localhost:4747.",
 };

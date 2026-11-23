@@ -228,6 +228,21 @@ Then **open Codex and approve the Habblaud hooks in `/hooks`**: Codex only runs 
 approve it (Habblaud never writes that approval). With Habblaud in Docker, to send messages to Codex sessions,
 also keep `npm run codex:bridge` running on the Mac (see [Codex](#codex)).
 
+### Desktop icon and app (Windows, optional)
+
+```bash
+npm run desktop:install      # "Habblaud" icon on the desktop (undo: npm run desktop:uninstall)
+```
+
+Double-click the icon: if Habblaud isn't running yet, it starts in the background (building first if `dist/` is
+missing, with this folder's `.env`, logs in `~/.habblaud/logs/server.log`), then the office opens in its own app
+window (Chrome or Edge with `--app`, otherwise the default browser). The server keeps running after you close the
+window; to stop it: `powershell -ExecutionPolicy Bypass -File scripts\windows\habblaud.ps1 -Stop`.
+
+Habblaud is also a **PWA**: in Chrome or Edge, **Install app** (the icon in the address bar) adds it to the Start menu
+and taskbar. If the installed app opens while the server is off, it shows "Habblaud isn't running" and reloads on its
+own as soon as the server answers (the service worker only keeps that page; the office always comes from the server).
+
 ### Open on your phone (optional)
 
 By default Habblaud only accepts connections from the computer it runs on. To open it on your phone (on the same Wi-Fi), with Docker:
@@ -383,6 +398,9 @@ a **colored chip with the account letter** (C, D…).
   card. The shells counter only shows up while some command is running; click it to go to whoever is waiting.
   Below the logo are the connection and the version in use, which turns into the **New version** badge when a new version comes out (see
   [Updating](#updating)).
+- **This computer:** next to the usage cards, the **CPU**, **RAM** and **battery** of the computer running Habblaud
+  (refreshed every 3 s while the tab is visible; the battery line hides on computers without one, and the card hides
+  on phones). It never goes into the timeline or to Habblaud World.
 - **Side panel:** search, account filter and the list of rooms with their agents and subagents.
 - **Details drawer:** click a character (in the building or in the list) to see activity, tasks, subagents,
   timeline and stats (tools, tokens, cost, lines changed, model, branch).

@@ -3274,4 +3274,25 @@ export const EN: Readonly<Record<string, string>> = {
   "Carimbo deixado na portaria: {0}": "Stamp left at the front desk: {0}",
   "Entre no prédio ou chegue mais perto da porta para carimbar.": "Go into the building or get closer to the door to stamp.",
   "O carimbo não foi deixado. Tente de novo.": "The stamp wasn't left. Try again.",
+
+  // client/src/ui/system.ts
+  "{0} núcleos": "{0} cores",
+  "Processador (CPU): {0}% em uso": "Processor (CPU): {0}% in use",
+  "Memória (RAM): {0}% em uso, {1} de {2} GB": "Memory (RAM): {0}% in use, {1} of {2} GB",
+  "carregando": "charging",
+  "na tomada": "plugged in",
+  "na bateria": "on battery",
+  "Bateria: {0}% ({1})": "Battery: {0}% ({1})",
+  "Bateria": "Battery",
+  "Este computador: CPU, memória e bateria do computador que roda o Habblaud": "This computer: CPU, memory and battery of the computer running Habblaud",
+  "Este computador": "This computer",
+
+  // scripts/desktop-install.ts
+  "Não foi possível criar o atalho: {0}": "Couldn't create the shortcut: {0}",
+  "✓ Atalho criado: {0}": "✓ Shortcut created: {0}",
+  "Dê dois cliques nele: o Habblaud sobe em segundo plano (se ainda não estiver rodando) e abre numa janela própria.": "Double-click it: Habblaud starts in the background (if it isn't running yet) and opens in its own window.",
+  "✓ Atalho removido: {0}": "✓ Shortcut removed: {0}",
+  "Nenhum atalho do Habblaud na área de trabalho.": "No Habblaud shortcut on the desktop.",
+  "Uso: npm run desktop:install (cria o atalho) ou npm run desktop:uninstall (apaga)": "Usage: npm run desktop:install (creates the shortcut) or npm run desktop:uninstall (removes it)",
+  "O atalho da área de trabalho por enquanto é só do Windows. Nos outros sistemas: npm start e abra http://localhost:4747.": "The desktop shortcut is Windows-only for now. On other systems: npm start and open http://localhost:4747.",
 };
